@@ -1,52 +1,65 @@
-Biblioteca de Arquitecturas de Infraestructura
-Este repositorio funciona como un catálogo centralizado y biblioteca de patrones de arquitectura, diseñado para documentar, estandarizar y compartir diseños de infraestructura empresarial. En esta sección se presenta el patrón de referencia para la implementación de clústeres de Docker Swarm, incluyendo la gestión de alta disponibilidad mediante Application Load Balancers (ALB) y la integración de flujos de CI/CD para despliegues automatizados.
+# Biblioteca de Arquitecturas de Infraestructura
 
-Visión General de la Biblioteca
-Esta biblioteca busca proveer a los equipos de ingeniería y DevOps planos técnicos listos para producción, garantizando:
+Este repositorio centraliza un catálogo estandarizado de patrones de arquitectura, diseñado para documentar y compartir diseños de infraestructura empresarial listos para producción. Proporciona una base técnica para equipos de ingeniería y DevOps enfocada en la escalabilidad, alta disponibilidad y automatización.
 
-Estandarización: Modelos reutilizables de topología de red, orquestación y despliegues.
+![Docker Swarm](https://img.shields.io/badge/Orquestación-Docker%20Swarm-blue)
+![Arquitectura](https://img.shields.io/badge/Tipo-Infraestructura%20as%20Code-green)
+![Estado](https://img.shields.io/badge/Estado-Activo-success)
 
-Alta Disponibilidad (HA): Diseños de referencia para nodos de orquestación y tolerancia a fallos.
+## Características Principales
 
-Balanceo de Carga: Patrones de integración con Application Load Balancers (ALB) para la distribución eficiente del tráfico.
+- **Estandarización:** Modelos de referencia reutilizables para topologías de red y orquestación.
+- **Alta Disponibilidad (HA):** Diseños validados para nodos de control y tolerancia a fallos.
+- **Balanceo de Carga:** Patrones de integración con Application Load Balancers (ALB) para la gestión eficiente del tráfico.
+- **Automatización CI/CD:** Definición de flujos para ciclos de entrega continua y despliegues sin tiempo de inactividad.
+- **Documentación Visual:** Diagramas esquemáticos vectoriales (.svg) y archivos editables (.drawio) para facilitar la adopción.
 
-Automatización de CI/CD: Flujos definidos para el ciclo de vida de entrega continua en el clúster.
+## Estructura del Proyecto
 
-Documentación Visual: Diagramas esquemáticos en formatos editables y vectoriales.
+La organización sigue una jerarquía modular basada en componentes tecnológicos:
 
-Estructura de la Biblioteca
-La estructura del repositorio organiza los patrones de arquitectura por dominio y componente técnico:
-
-Plaintext
+```text
 .
-├── architecture-patterns/
-│   └── docker-swarm/             # Patrón de Arquitectura: Docker Swarm
-│       ├── diagrams/
-│       │   ├── ALB/              # Diagramas de Application Load Balancer
-│       │   ├── swarm-cicd/       # Diagramas de pipelines CI/CD
-│       │   └── swarm-infrastructure/# Topología física y lógica de Docker Swarm
-│       └── README.md             # Especificación técnica del patrón
-Detalle de Directorios y Recursos
-/diagrams/ALB: Archivos .drawio y exportaciones .svg que describen las capas de entrada, terminación SSL y distribución de tráfico.
+├── diagrams/
+│   ├── ALB/                      # Configuración de balanceadores de carga
+│   ├── swarm-cicd/               # Flujos de integración y despliegue continuo
+│   └── swarm-infrastructure/     # Topología de red y quórum del clúster
+└── README.md
+```
 
-/diagrams/swarm-cicd: Visualización de pipelines, integración con registros de contenedores y despliegues sin tiempo de inactividad (rolling updates).
+## Patrones Disponibles
 
-/diagrams/swarm-infrastructure: Esquema detallado de red overlay, comunicación entre nodos manager y worker, y quórum del clúster.
+### 1. Docker Swarm Infrastructure
+Arquitectura base para el despliegue de clústeres. Incluye la configuración de la red overlay, comunicación entre nodos y estrategias de quórum para los nodos manager.
+- [Ver documentación y diagramas](./diagrams/swarm-infrastructure/)
 
-Visualización de Diagramas
-Los diagramas están disponibles en formatos vectoriales (.svg) para su visualización directa en el repositorio, así como en archivos editables (.drawio).
+### 2. Application Load Balancer (ALB)
+Patrón para la gestión de tráfico de entrada, terminación SSL y distribución hacia los nodos trabajadores del clúster.
+- [Ver documentación y diagramas](./diagrams/ALB/)
 
-Para abrir o editar los archivos .drawio, puedes utilizar cualquier visor o instancia web de Draw.io disponible en internet (como app.diagrams.net), o bien utilizar la extensión de Draw.io para tu editor de código preferido.
+### 3. CI/CD Pipeline para Swarm
+Flujos de trabajo automatizados para la integración de registros de contenedores y ejecuciones de *rolling updates*.
+- [Ver documentación y diagramas](./diagrams/swarm-cicd/)
 
-Gobernanza y Mantenimiento
-Esta biblioteca es mantenida por el equipo de Arquitectura y DevOps. Las propuestas de nuevos patrones o mejoras a los existentes se gestionan mediante Pull Requests.
+## Visualización de Diagramas
 
-Al añadir o modificar una arquitectura en la biblioteca, asegúrese de:
+Todos los patrones incluyen archivos en formato `.drawio` para edición y archivos `.svg` para visualización directa. Puede editar los archivos de diseño utilizando:
+- **[app.diagrams.net](https://app.diagrams.net)**: Cargar el archivo `.drawio` directamente en su navegador.
+- **Extensiones de IDE**: Utilizando el plugin de Draw.io en VS Code o IntelliJ.
 
-Actualizar el archivo fuente .drawio en la subcarpeta correspondiente.
+## Guía de Uso
 
-Exportar y reemplazar la versión vectorial en .svg sincronizada con el cambio.
+1. **Exploración**: Navegue por el directorio `diagrams/` para encontrar el patrón de arquitectura necesario para su caso de uso.
+2. **Validación**: Revise el `README.md` específico dentro de cada subcarpeta para consultar las decisiones de diseño y configuraciones recomendadas.
+3. **Implementación**: Utilice los diagramas como referencia técnica para la configuración de sus entornos de infraestructura.
 
-Incluir una ficha técnica en el README.md del patrón indicando decisiones de diseño, ventajas y casos de uso recomendados.
+## Mantenimiento y Contribución
 
-Mantener las convenciones de nomenclatura del repositorio.
+Esta biblioteca es mantenida por el equipo de Arquitectura y DevOps. Para proponer nuevos patrones o mejoras:
+
+1. Realice un **Fork** del repositorio.
+2. Cree una rama para su mejora.
+3. Asegúrese de incluir el archivo fuente `.drawio` y la versión exportada `.svg`.
+4. Envíe un **Pull Request** detallando las decisiones de diseño y ventajas del nuevo patrón.
+
+Para soporte técnico o consultas sobre la arquitectura, abra un *Issue* en este repositorio.
